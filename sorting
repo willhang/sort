@@ -1,0 +1,72 @@
+/**
+ * 
+ */
+package Assignment_2;
+
+import java.util.Arrays;
+import java.util.Random;
+
+/**
+ * @author willh
+ *
+ */
+public class Sorting {
+	public static void main(String[] args) {
+		Integer[] numList = new Integer[1000000];
+		Integer[] numList2 = new Integer[1000000];
+		int sortCount = 0;
+		int insertCount = 0;
+		for(int i = 0; i < numList.length; i++){
+			Random rand = new Random();
+			numList[i] = rand.nextInt(1000) + 1;
+		}
+		for(int i = 0; i < numList2.length; i++){
+			Random rand = new Random();
+			numList2[i] = rand.nextInt(1000) + 1;
+		}
+		sortCount = selectionSort(numList, sortCount);
+		insertCount = insertionSort(numList2, insertCount);
+		System.out.println("Selection sort iteration: " + sortCount + "\n" +
+						   "Insertion sort iteration: " + insertCount);
+		
+	}
+	private static int selectionSort(Integer[] list, int count){
+		for(int i = 0; i < list.length - 1; i++){
+			int num2 = list[i + 1];
+			int num1 = list[i];
+			if(num2 < num1){
+				int j = i;
+				while(j >= 0){
+					count++;
+					int num3 = list[j];
+					if(num3 >= num2){
+						list[j] = (Integer) num2;
+						list[j + 1] = (Integer) num3;
+					}
+					else
+						break;
+					j--;
+				}
+			}
+			else
+				count++;
+		}
+		return count;
+	}
+	private static int insertionSort(Integer[] list, int count){
+		int temp;
+        for (int i = 1; i < list.length; i++) {
+            for(int j = i ; j > 0 ; j--){
+                if(list[j] < list[j-1]){
+                	count++;
+                    temp = list[j];
+                    list[j] = list[j-1];
+                    list[j-1] = temp;
+                }
+                else
+                	break;
+            }
+        }
+        return count;
+	}
+}
